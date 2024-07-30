@@ -8,6 +8,7 @@ import 'codemirror/addon/edit/closebrackets';
 import ACTIONS from '../Actions';
 
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
+
     const editorRef = useRef(null);
     useEffect(() => {
         async function init() {
@@ -21,7 +22,8 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                     lineNumbers: true,
                 }
             );
-
+            //event listener for synciing code editor
+            //using current instance of code on code editor
             editorRef.current.on('change', (instance, changes) => {
                 const { origin } = changes;
                 const code = instance.getValue();

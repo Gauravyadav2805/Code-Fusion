@@ -37,11 +37,16 @@ io.on('connection', (socket) => {
             io.to(socketId).emit(ACTIONS.JOINED, {
                 clients,
                 username,
-                socketId: socket.id,
+                socketId: socket.id,  
             });
         });
     });
 
+    //when any change is made by any user the CODE_CHANGE func is called
+    // then code of every user is changed by this function
+    //there was an error in this, we were sending this code to server, then this client was also recieving this updated code
+    // which will override this given code, and move cursor at the beginning, with inverted text
+    // so we have to update the code in every client except the one who's currently writing
     socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
         socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
     });

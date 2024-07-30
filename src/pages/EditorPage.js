@@ -20,6 +20,7 @@ const EditorPage = () => {
     const [clients, setClients] = useState([]);
 
     useEffect(() => {
+        console.log("login ho gaya bhai");
         const init = async () => {
             socketRef.current = await initSocket();
             socketRef.current.on('connect_error', (err) => handleErrors(err));
@@ -44,11 +45,15 @@ const EditorPage = () => {
                         toast.success(`${username} joined the room.`);
                         console.log(`${username} joined`);
                     }
+                    
+                    // when a new user joins, then already written code inside code editor will not be visible
+                    // until any user make any change in the code
+                    // for that we call this function
                     setClients(clients);
                     socketRef.current.emit(ACTIONS.SYNC_CODE, {
                         code: codeRef.current,
                         socketId,
-                    });
+                    }); 
                 }
             );
 
@@ -65,8 +70,11 @@ const EditorPage = () => {
                 }
             );
         };
+        // always clear all the listeners
+        //otherwise there could be data leakage
         init();
         return () => {
+            //socket disconnect
             socketRef.current.disconnect();
             socketRef.current.off(ACTIONS.JOINED);
             socketRef.current.off(ACTIONS.DISCONNECTED);
@@ -98,7 +106,7 @@ const EditorPage = () => {
                     <div className="logo">
                         <img
                             className="logoImage"
-                            src="/code-sync.png"
+                            src="/code-fusion.png"
                             alt="logo"
                         />
                     </div>
