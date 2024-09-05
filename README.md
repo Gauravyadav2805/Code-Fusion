@@ -10,7 +10,7 @@ Code Fusion is a collaborative real-time code editor application designed to all
 # Screenshot
 <div style="flex w-full justify-center items-center ">
   <img src="https://github.com/Gauravyadav2805/Code-Fusion/blob/main/public/code-fusion ss1.png"> </div>
-  <img src="https://github.com/Gauravyadav2805/PicBlend/blob/main/public/images/code-fusion ss2.png"> </div>
+  <img src="https://github.com/Gauravyadav2805/Code-Fusion/blob/main/public/code-fusion ss2.png"> </div>
 <br>
 <br>
 
